@@ -8,7 +8,7 @@
 import UIKit
 import PhotosUI
 
-class ViewController: UIViewController {
+class AddStoryPromptViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var nounTextField: UITextField!
@@ -24,20 +24,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         numberSlider.value = 7.5
-        storyPrompt.noun = "toaster"
-        storyPrompt.adjective = "smelly"
-        storyPrompt.verb = "burps"
-        storyPrompt.number = Int(numberSlider.value)
         storyPromptImageView.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self,
                                                        action: #selector(changeImage))
         storyPromptImageView.addGestureRecognizer(gestureRecognizer)
     }
+    
     // MARK: - Methods
     @IBAction func generateStoryPrompt(_ sender: UIButton) {
         updateStoryPrompt()
         if storyPrompt.isValid() {
-            print(storyPrompt)
+            performSegue(withIdentifier: "StoryPrompt", sender: nil)
         } else {
             let alert = UIAlertController(title: "Invalid Story Prompt",
                                           message: "Please fill out all of the fields",
@@ -75,10 +72,20 @@ class ViewController: UIViewController {
         controller.delegate = self
         present(controller, animated: true)
     }
+
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "StoryPrompt" {
+            guard let storyPromptViewController = segue.destination as? StoryPromptViewController else {
+                return
+            }
+            storyPromptViewController.storyPrompt = storyPrompt
+        }
+    }
 }
 
     // MARK: - TextField Delegate
-extension ViewController: UITextFieldDelegate {
+extension AddStoryPromptViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         updateStoryPrompt()
@@ -87,7 +94,7 @@ extension ViewController: UITextFieldDelegate {
 }
 
     // MARK: - PHPicker ViewController Delegate
-extension ViewController: PHPickerViewControllerDelegate {
+extension AddStoryPromptViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         if !results.isEmpty {
             let result = results.first!

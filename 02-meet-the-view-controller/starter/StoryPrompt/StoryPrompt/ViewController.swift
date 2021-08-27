@@ -36,7 +36,18 @@ class ViewController: UIViewController {
     // MARK: - Methods
     @IBAction func generateStoryPrompt(_ sender: UIButton) {
         updateStoryPrompt()
-        print(storyPrompt)
+        if storyPrompt.isValid() {
+            print(storyPrompt)
+        } else {
+            let alert = UIAlertController(title: "Invalid Story Prompt",
+                                          message: "Please fill out all of the fields",
+                                          preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { alert in
+
+            }
+            alert.addAction(action)
+            present(alert, animated: true)
+        }
     }
     @IBAction func changeNumber(_ sender: UISlider) {
         numberLabel.text = "Number: \(Int(sender.value))"
@@ -92,5 +103,6 @@ extension ViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
+        picker.dismiss(animated: true)
     }
 }

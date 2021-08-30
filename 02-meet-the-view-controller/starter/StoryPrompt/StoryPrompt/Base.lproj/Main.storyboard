@@ -177,6 +177,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="O7W-9g-G9E">
+                                <rect key="frame" x="150.5" y="832" width="113" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPl-03-xIM">
+                                        <rect key="frame" x="0.0" y="0.0" width="53" height="30"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Discard"/>
+                                        <connections>
+                                            <action selector="cancelStoryPrompt:" destination="Xqx-pp-lfY" eventType="touchUpInside" id="28y-5k-hQ5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zv9-OO-9Xo">
+                                        <rect key="frame" x="79" y="0.0" width="34" height="30"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <segue destination="Wvz-OD-J30" kind="unwind" unwindAction="saveStoryPromptWithUnwindSegue:" id="eT8-qi-1uX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wAm-JI-e6k"/>
                         <color key="backgroundColor" red="0.0" green="0.89411764709999997" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -184,6 +205,8 @@
                             <constraint firstItem="XcH-K8-zgO" firstAttribute="width" secondItem="VFa-r4-PT0" secondAttribute="width" id="1JS-z4-yME"/>
                             <constraint firstItem="XcH-K8-zgO" firstAttribute="centerX" secondItem="VFa-r4-PT0" secondAttribute="centerX" id="6H9-nW-S3x"/>
                             <constraint firstItem="GOd-ws-9dU" firstAttribute="centerX" secondItem="XcH-K8-zgO" secondAttribute="centerX" id="bPg-fr-Pby"/>
+                            <constraint firstItem="O7W-9g-G9E" firstAttribute="centerX" secondItem="VFa-r4-PT0" secondAttribute="centerX" id="dfA-82-TML"/>
+                            <constraint firstItem="wAm-JI-e6k" firstAttribute="bottom" secondItem="O7W-9g-G9E" secondAttribute="bottom" id="fxm-1H-JCE"/>
                             <constraint firstItem="XcH-K8-zgO" firstAttribute="centerY" secondItem="VFa-r4-PT0" secondAttribute="centerY" id="tPa-yy-9sA"/>
                             <constraint firstItem="GOd-ws-9dU" firstAttribute="centerY" secondItem="XcH-K8-zgO" secondAttribute="centerY" id="z39-Er-8S7"/>
                         </constraints>
@@ -191,9 +214,11 @@
                     <navigationItem key="navigationItem" id="nfH-WZ-c2h"/>
                     <connections>
                         <outlet property="storyPromptTextField" destination="GOd-ws-9dU" id="HcL-5V-EmD"/>
+                        <segue destination="Wvz-OD-J30" kind="unwind" identifier="CancelStoryPrompt" unwindAction="cancelStoryPromptWithUnwindSegue:" id="RJh-FQ-3OY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUG-Az-PiL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Wvz-OD-J30" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1765" y="856"/>
         </scene>
